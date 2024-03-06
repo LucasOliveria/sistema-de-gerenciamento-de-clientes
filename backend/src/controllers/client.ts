@@ -3,7 +3,7 @@ import { knex } from "../database/connection";
 import { TClient } from "../types/TClient";
 import { TClientsCoords } from "../types/TClientsCoords";
 import { TCoordinate } from "../types/TCoordinate";
-import { FormatCLientArray } from "../utils/formatClientArray";
+import { FormatCLientArray } from "../helpers/formatClientArray";
 
 export class ClientsController {
 

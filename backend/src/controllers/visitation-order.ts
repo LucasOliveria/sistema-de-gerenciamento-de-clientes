@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { knex } from "../database/connection";
 import { TClientsCoords } from "../types/TClientsCoords";
-import { FormatCLientArray } from "../utils/formatClientArray";
-import { visitationOrder } from "../utils/visitationOrder";
+import { FormatCLientArray } from "../helpers/formatClientArray";
+import { visitationOrder } from "../helpers/visitationOrder";
 import { ClientsController } from "./client";
 
 export class VisitationOrderController extends ClientsController {
