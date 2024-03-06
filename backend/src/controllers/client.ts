@@ -1,32 +1,19 @@
 import { Request, Response } from "express";
 import { knex } from "../database/connection";
 import { TClient } from "../types/TClient";
+import { TClientsCoords } from "../types/TClientsCoords";
 import { TCoordinate } from "../types/TCoordinate";
+import { FormatCLientArray } from "../utils/formatClientArray";
 
 export class ClientsController {
 
-  async listClients(req: Request, res: Response) {
+  async listClients(_: Request, res: Response) {
     try {
-      const clients: (TClient & Omit<TCoordinate, "id" | "user_id">)[] = await knex("clients").join("coordinates", "clients.id", "coordinates.user_id").select("clients.*", "coordinates.coord_x", "coordinates.coord_y");
+      const clients: TClientsCoords[] = await knex("clients").join("coordinates", "clients.id", "coordinates.user_id").select("clients.*", "coordinates.coord_x", "coordinates.coord_y");
 
-      let formattedClientsArray = []
+      const formattedClientsArray = FormatCLientArray(clients);
 
-      for (const client of clients) {
-        const clientObject: TClient & { coordinates: Omit<TCoordinate, "id" | "user_id"> } = {
-          id: client.id,
-          name: client.name,
-          email: client.email,
-          phone: client.phone,
-          coordinates: {
-            coord_x: client.coord_x,
-            coord_y: client.coord_y
-          }
-        }
-
-        formattedClientsArray.push(clientObject);
-      }
-
-      res.status(200).json(formattedClientsArray);
+      return res.status(200).json(formattedClientsArray);
     } catch (error) {
       return res.status(500).json({ message: "Erro interno do servidor!" });
     }
@@ -39,8 +26,9 @@ export class ClientsController {
       const client = await knex<TClient>("clients").where({ email }).first();
 
       if (client) {
-        return res.status(400).json({ message: "O e-mail informado já possui cadastro." })
+        return res.status(400).json({ message: "O e-mail informado já possui cadastro." });
       }
+
       const registeredClient = await knex<TClient>("clients").insert({ name, email, phone }).returning("*");
 
       const coordinate = await knex<TCoordinate>("coordinates").insert({ user_id: registeredClient[0].id, coord_x, coord_y }).returning("*");
