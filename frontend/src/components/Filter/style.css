@@ -1,0 +1,66 @@
+.filter-container {
+  width: 35.2rem;
+  margin-bottom: 1rem;
+}
+
+.filter-container form {
+  height: 6.1rem;
+}
+
+.filter-container form span {
+  color: #f72585;
+  font-size: 1.4rem;
+}
+
+.input-search {
+  display: flex;
+  gap: 1rem;
+}
+
+.input-search button.search-button {
+  width: 6.8rem;
+  margin: 0;
+  height: 4rem;
+  font-size: 1.6rem;
+}
+
+.filters-and-title {
+  margin-top: 0.7rem;
+}
+
+.filters-and-title h4 {
+  margin-bottom: 0.5rem;
+  color: #4361ee;
+}
+
+.filters {
+  display: flex;
+  gap: 1rem;
+}
+
+.filter-option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 6.9rem;
+  height: 4rem;
+  background-color: #ffffff;
+  border: 1px solid #7209b7;
+  border-radius: 0.6rem;
+  cursor: pointer;
+}
+
+.filter-option p {
+  text-align: center;
+  color: #7209b7;
+  font-weight: 420;
+}
+
+.filter-selected {
+  background-color: #7209b7;
+  border: none;
+}
+
+.filter-selected p {
+  color: #ffffff;
+}

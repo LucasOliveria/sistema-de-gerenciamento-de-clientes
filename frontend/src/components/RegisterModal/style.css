@@ -1,0 +1,35 @@
+.client-register-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100%;
+  background-color: #00000061;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+}
+
+.client-register-modal form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.client-register-modal form h3 {
+  margin-bottom: 1rem;
+}
+
+.client-register-modal form h3,
+.input-register-container label {
+  font-weight: 700;
+  color: #4361ee;
+}
+
+.input-register-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+}

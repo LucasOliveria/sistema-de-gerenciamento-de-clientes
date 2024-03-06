@@ -1,0 +1,60 @@
+.main-home {
+  display: flex;
+  margin-top: 10rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-table-container {
+  width: 100rem;
+  min-width: 35.5rem;
+  margin: 0 1.5rem;
+}
+
+.img-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.img-button img {
+  width: 2.2rem;
+}
+
+.home-table-container button:last-of-type {
+  margin-left: 1.5rem;
+}
+
+.home-table {
+  margin-bottom: 5rem;
+}
+
+.home-table table {
+  min-width: 90rem;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.home-table table thead th {
+  padding: 0.6rem 1rem;
+  text-align: start;
+  font-size: 1.8rem;
+  color: #4361ee;
+}
+
+.home-table tbody td {
+  width: 30rem;
+  text-align: start;
+  padding: 1.2rem;
+  font-family: "Nunito", sans-serif;
+  font-size: 1.5rem;
+  color: #7b7575;
+  word-break: break-all;
+  border-top: 1px solid #E6E6E6;
+}
+
+.home-table tbody td span {
+  font-weight: 900;
+  color: #4361ee;
+}
