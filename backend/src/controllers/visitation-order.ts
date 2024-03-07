@@ -5,7 +5,7 @@ import { FormatCLientArray } from "../helpers/formatClientArray";
 import { visitationOrder } from "../helpers/visitationOrder";
 import { ClientsController } from "./client";
 
-export class VisitationOrderController extends ClientsController {
+export class VisitationOrderController {
 
   async getVisitationOrder(_: Request, res: Response) {
     try {
