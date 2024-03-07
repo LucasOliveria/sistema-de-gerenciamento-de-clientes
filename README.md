@@ -59,11 +59,11 @@ DATABASE_USER="SeuNomeDeUsuarioPostgres"
 DATABASE_PASS="SuaSenhaDeUsuarioPostgres"
 DATABASE_NAME="sgc_database"
 ```
-8. Agora abra novamente o terminal do editor de código (IDE), navegue até a pasta **backend** e rode o comando **npm run dev**.  
+8. Agora abra novamente o terminal do editor de código (IDE), navegue até a pasta **backend** e rode o comando **npm run dev**. OBS.: Não feche esse terminal, apenas prossiga para as configurações do Frontend.  
 
 ## Configurações do Frontend
 
-1. Com o projeto aberto no editor de códigos, abra um terminal no editor e navegue até a pasta **frontend**.
+1. Com o projeto aberto no editor de códigos, abra uma novo aba de terminal no editor e navegue até a pasta **frontend**. OBS.: Não feche ou reutilize o terminal que você utilizou para dar o comando **npm run dev** no passo 8. Para esse passo aqui é necessário abrir uma nova aba de terminal no editor de código.
 2. Com o caminho do terminal apontado para a pasta frontend, digite o comando "**npm install**" para instalar as dependências.
 3. Após isso, utilizando o mesmo terminal e digite o comando **npm run dev**.
 4. Abra o navegador que costuma utilizar (chrome, firefox, edge...) e digite a URL: http://localhost:5173/
