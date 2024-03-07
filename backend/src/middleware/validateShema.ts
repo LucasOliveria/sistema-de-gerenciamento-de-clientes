@@ -7,7 +7,6 @@ export const validateSchema = (shema: Schema) => async (req: Request, res: Respo
 
     next();
   } catch (error: any) {
-    console.log(error);
     return res.status(400).json({ mensagem: error.message });
   }
 }
