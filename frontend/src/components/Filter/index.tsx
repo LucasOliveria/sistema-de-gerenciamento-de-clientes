@@ -1,12 +1,14 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import './style.css';
+import useStatesContext from '../../hooks/useStatesContext';
 
 function Filter() {
+  const { clients, setClients, clientsCopy } = useStatesContext();
   const [filterSelected, setFilterSelected] = useState<string>("name");
   const [formSearch, setFormSearch] = useState({ search: "" });
   const [span, setSpan] = useState<string>("");
 
-  function handleSubmit(event: FormEvent) {
+  function handleSubmitFilter(event: FormEvent) {
     event.preventDefault();
     const { search } = formSearch;
 
@@ -14,24 +16,48 @@ function Filter() {
       setSpan("Campo obrigatório!")
       return
     }
-    setSpan("");
-    console.log(search);
 
+    setSpan("");
+    const localCLients = clients
+
+    const localCLientsFiltered = localCLients.filter((client) => {
+      if (filterSelected === "name") {
+        return client.name.toLowerCase().startsWith(search.toLowerCase());
+      }
+
+      if (filterSelected === "email") {
+        return client.email.toLowerCase().startsWith(search.toLowerCase());
+      }
+      if (filterSelected === "phone") {
+        return client.phone.toLowerCase().startsWith(search.toLowerCase());
+      }
+    })
+
+
+    setClients(localCLientsFiltered);
+    setFormSearch({ search: "" });
   }
 
   function handleChangeSearch(event: ChangeEvent<HTMLInputElement>) {
     setFormSearch({ search: event.target.value })
+    setClients(clientsCopy);
   }
 
   function handleFilterOption(filter: string) {
     setFilterSelected(filter);
   }
 
+  function handleFilterClearing() {
+    setFormSearch({ search: "" });
+    setFilterSelected("name");
+    setClients(clientsCopy);
+  }
+
   return (
     <div className='filter-container'>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmitFilter}>
         <div className="input-search">
-          <input onChange={handleChangeSearch} type="text" name="search" value={formSearch.search} placeholder='Pesquisar...' />
+          <input onChange={handleChangeSearch} type="text" name="search" value={formSearch.search} placeholder='Pesquisar...' autoComplete='true' />
           <button className='search-button'>Buscar</button>
         </div>
         <span>{span}</span>
@@ -47,6 +73,9 @@ function Filter() {
           </div>
           <div onClick={() => handleFilterOption("phone")} className={`filter-option ${filterSelected === "phone" && "filter-selected"}`}>
             <p>Telefone</p>
+          </div>
+          <div className='clear-button-box'>
+            <button onClick={handleFilterClearing} className='clear-button'>Limpar</button>
           </div>
         </div>
       </div>

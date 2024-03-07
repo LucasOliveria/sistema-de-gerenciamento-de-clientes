@@ -1,4 +1,4 @@
-.client-register-modal {
+.generic-modal {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,18 +10,18 @@
   bottom: 0;
 }
 
-.client-register-modal form {
+.generic-modal form {
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
 }
 
-.client-register-modal form h3 {
+.generic-modal form h3 {
   margin-bottom: 1rem;
 }
 
-.client-register-modal form h3,
+.generic-modal form h3,
 .input-register-container label {
   font-weight: 700;
   color: #4361ee;
