@@ -19,9 +19,27 @@ Após instalação das ferramentas necessárias, siga os passos abaixo:
 1. Com o projeto aberto no editor de códigos, abra um terminal no editor e navegue até a pasta **backend**.
 2. Com o caminho do terminal apontado para a pasta backend, digite o comando "**npm install**" para instalar as dependências.
 3. Agora vamos precisar das querys para criar o banco de dados e suas tabelas. Tais comando estão no arquivo ```dump.sql```, para encontrá-lo basta clicar nas pastas ```backend > src > database > dump.sql```.
-4. Com o auxilio da ferramenta que você utiliza para criar e manipular banco de dados, crie um banco de dados utilizando a primeira linha de comando do ```dump.sql```:
+4. Com o auxilio da ferramenta que você utiliza para criar e manipular banco de dados (editor SQL), crie um banco de dados utilizando a primeira linha de comando do ```dump.sql```:
+
 ```sql
 CREATE DATABASE sgc_database;
+```
+5. Ainda no editor SQL, entre no banco de dados que você acabou de criar e utilize os outros comando presentes no ```dump.sql``` para criar as tabelas.
+
+```sql
+CREATE TABLE clients (
+  ID SERIAL PRIMARY KEY,
+  NAME VARCHAR(255) NOT NULL,
+  EMAIL TEXT UNIQUE NOT NULL,
+  PHONE VARCHAR(11) NOT NULL
+);
+
+CREATE TABLE coordinates (
+  ID SERIAL PRIMARY KEY,
+  USER_ID INTEGER REFERENCES clients(id),
+  COORD_X DOUBLE PRECISION NOT NULL,
+  COORD_Y DOUBLE PRECISION NOT NULL
+);
 ```
 OBS.: Caso não possua nenhuma ferramenta para criação e manipulação de banco de dados pode fazer o download de alguma dessas listadas abaixo:
 
@@ -30,8 +48,8 @@ OBS.: Caso não possua nenhuma ferramenta para criação e manipulação de banc
 * DataGrip
 * SQL Workbench/J
 
-5. Existem variáveis de ambiente inseridas nos códigos e essas devem ser configuradas antes de inicializar a aplicação. Para isso duplique o arquivo ```.env.example``` que está na raiz da pasta backend, e renomeie para ```.env```. 
-6. Dentro do arquivo ```.env``` preencha as variáveis com as configurações de conexão que costuma utilizar, lembrando que o nome do banco de dados criado anteriormente é **sgc_database**. O nome e senha de usuario postgreSQL que serão utilizados aqui são os mesmos que foram configurados ao instalar o postgreSQL em sua máquina. Abaixo esta um exemplo de como configurar as variáveis de ambiante com base nas configurações mais usuais.
+6. Existem variáveis de ambiente inseridas nos códigos e essas devem ser configuradas antes de inicializar a aplicação. Para isso duplique o arquivo ```.env.example``` que está na raiz da pasta backend, e renomeie para ```.env```. 
+7. Dentro do arquivo ```.env``` preencha as variáveis com as configurações de conexão que costuma utilizar, lembrando que o nome do banco de dados criado anteriormente é **sgc_database**. O nome e senha de usuario postgreSQL que serão utilizados aqui são os mesmos que foram configurados ao instalar o postgreSQL em sua máquina. Abaixo esta um exemplo de como configurar as variáveis de ambiante com base nas configurações mais usuais.
 
 #### .env (exemplos)
 ```javascript
@@ -41,7 +59,7 @@ DATABASE_USER="SeuNomeDeUsuarioPostgres"
 DATABASE_PASS="SuaSenhaDeUsuarioPostgres"
 DATABASE_NAME="sgc_database"
 ```
-7. Agora abra novamente o terminal do editor de código (IDE), navegue até a pasta **backend** e rode o comando **npm run dev**.  
+8. Agora abra novamente o terminal do editor de código (IDE), navegue até a pasta **backend** e rode o comando **npm run dev**.  
 
 ## Configurações do Frontend
 
