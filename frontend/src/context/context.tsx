@@ -22,6 +22,8 @@ interface IContextProps {
   setRegisterModalEntrace: Dispatch<SetStateAction<boolean>>
   visitOrderModalEntrace: boolean
   setVisitOrderModalEntrace: Dispatch<SetStateAction<boolean>>
+  clientsVisitationOrder: TClient[]
+  setClientsVisitationOrder: Dispatch<SetStateAction<TClient[]>>
 }
 
 export const context = createContext({} as IContextProps);
@@ -29,6 +31,7 @@ export const context = createContext({} as IContextProps);
 function Context({ children }: { children: ReactNode }) {
   const [clients, setClients] = useState<TClient[]>([]);
   const [clientsCopy, setClientsCopy] = useState<TClient[]>([]);
+  const [clientsVisitationOrder, setClientsVisitationOrder] = useState<TClient[]>([]);
 
   const [registerModalEntrace, setRegisterModalEntrace] = useState<boolean>(false);
   const [visitOrderModalEntrace, setVisitOrderModalEntrace] = useState<boolean>(false);
@@ -49,7 +52,9 @@ function Context({ children }: { children: ReactNode }) {
         formRegister,
         setFormRegister,
         visitOrderModalEntrace,
-        setVisitOrderModalEntrace
+        setVisitOrderModalEntrace,
+        clientsVisitationOrder,
+        setClientsVisitationOrder
       }}
     >
       {children}

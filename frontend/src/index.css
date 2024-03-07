@@ -23,10 +23,23 @@ body {
   background-position: right;
 }
 
+.generic-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100%;
+  background-color: #0000006f;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+}
+
 .home-table,
 .filter-container,
-.generic-modal form,
-.visit-order-container {
+.generic-modal form {
   padding: 1.5rem;
   border-radius: 0.8rem;
   background-color: #ffffff;

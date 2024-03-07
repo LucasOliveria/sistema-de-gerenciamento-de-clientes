@@ -14,7 +14,7 @@ import VisitOrderModal from '../../components/VisitOrderModal';
 
 function Home() {
   const [filterEntrace, setFilterEntrace] = useState<boolean>(false);
-  const { registerModalEntrace, setRegisterModalEntrace, clients, setClients, setClientsCopy, clientsCopy, setVisitOrderModalEntrace, visitOrderModalEntrace } = useStatesContext();
+  const { registerModalEntrace, setRegisterModalEntrace, clients, setClients, setClientsCopy, clientsCopy, setVisitOrderModalEntrace, visitOrderModalEntrace, setClientsVisitationOrder } = useStatesContext();
 
   async function getClients() {
     try {
@@ -33,7 +33,14 @@ function Home() {
   }
 
   async function handleVisitationOrder() {
-    setVisitOrderModalEntrace(true);
+    try {
+      const response = await api.get("/visitation-order");
+
+      setClientsVisitationOrder(response.data);
+      setVisitOrderModalEntrace(true);
+    } catch (error) {
+      console.log("Erro interno do servidor. Tente novamente mais tarde!");
+    }
   }
 
   useEffect(() => {
