@@ -24,6 +24,8 @@ interface IContextProps {
   setVisitOrderModalEntrace: Dispatch<SetStateAction<boolean>>
   clientsVisitationOrder: TClient[]
   setClientsVisitationOrder: Dispatch<SetStateAction<TClient[]>>
+  animationOut: boolean
+  setAnimationOut: Dispatch<SetStateAction<boolean>>
 }
 
 export const context = createContext({} as IContextProps);
@@ -35,6 +37,7 @@ function Context({ children }: { children: ReactNode }) {
 
   const [registerModalEntrace, setRegisterModalEntrace] = useState<boolean>(false);
   const [visitOrderModalEntrace, setVisitOrderModalEntrace] = useState<boolean>(false);
+  const [animationOut, setAnimationOut] = useState<boolean>(false);
 
   const [formRegister, setFormRegister] = useState<TClient>({
     name: "", email: "", phone: "", coordinates: { coord_x: "", coord_y: "" }
@@ -54,7 +57,9 @@ function Context({ children }: { children: ReactNode }) {
         visitOrderModalEntrace,
         setVisitOrderModalEntrace,
         clientsVisitationOrder,
-        setClientsVisitationOrder
+        setClientsVisitationOrder,
+        animationOut,
+        setAnimationOut
       }}
     >
       {children}

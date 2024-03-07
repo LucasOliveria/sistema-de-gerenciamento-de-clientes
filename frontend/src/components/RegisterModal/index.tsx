@@ -94,7 +94,7 @@ function RegisterModal() {
   }
   return (
     <div className="generic-modal">
-      <form onSubmit={handleSubmitRegister}>
+      <form onSubmit={handleSubmitRegister} className='fade-in-top'>
         <img src={xIcon} alt="x-icon" onClick={handleCloseModal} />
         <h3>Cadastrar Cliente</h3>
         <div className="input-register-container">

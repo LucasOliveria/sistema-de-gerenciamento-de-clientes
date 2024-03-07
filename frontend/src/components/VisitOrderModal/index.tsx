@@ -8,7 +8,7 @@ function VisitOrderModal() {
   return (
     <div className="generic-modal">
       {clientsVisitationOrder.length !== 0 ?
-        <div className="visit-order-container">
+        <div className="visit-order-container fade-in-top">
           <div className="close-icon-title">
             <img src={xIcon} alt="x-icon" onClick={() => setVisitOrderModalEntrace(false)} />
             <h3>Ordem de Visitação</h3>
@@ -30,7 +30,7 @@ function VisitOrderModal() {
           </div>
         </div>
         :
-        <div className="no-clients">
+        <div className="no-clients fade-in-top">
           <img src={xIcon} alt="x-icon" onClick={() => setVisitOrderModalEntrace(false)} />
           <h4>Você ainda não possui clientes cadastrados. Cadastre alguns clintes para começar!</h4>
         </div>

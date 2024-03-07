@@ -3,7 +3,7 @@ import './style.css';
 import useStatesContext from '../../hooks/useStatesContext';
 
 function Filter() {
-  const { clients, setClients, clientsCopy } = useStatesContext();
+  const { clients, setClients, clientsCopy, animationOut } = useStatesContext();
   const [filterSelected, setFilterSelected] = useState<string>("name");
   const [formSearch, setFormSearch] = useState({ search: "" });
   const [span, setSpan] = useState<string>("");
@@ -54,7 +54,7 @@ function Filter() {
   }
 
   return (
-    <div className='filter-container'>
+    <div className={`filter-container ${!animationOut ? "fade-in-top" : "fade-out-top"}`}>
       <form onSubmit={handleSubmitFilter}>
         <div className="input-search">
           <input onChange={handleChangeSearch} type="text" name="search" value={formSearch.search} placeholder='Pesquisar...' autoComplete='true' />

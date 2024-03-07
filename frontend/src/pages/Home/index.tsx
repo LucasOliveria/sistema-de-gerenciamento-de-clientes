@@ -15,7 +15,7 @@ import { toast } from 'react-toastify';
 
 function Home() {
   const [filterEntrace, setFilterEntrace] = useState<boolean>(false);
-  const { registerModalEntrace, setRegisterModalEntrace, clients, setClients, setClientsCopy, clientsCopy, setVisitOrderModalEntrace, visitOrderModalEntrace, setClientsVisitationOrder } = useStatesContext();
+  const { registerModalEntrace, setRegisterModalEntrace, clients, setClients, setClientsCopy, clientsCopy, setVisitOrderModalEntrace, visitOrderModalEntrace, setClientsVisitationOrder, setAnimationOut } = useStatesContext();
 
   async function getClients() {
     const toastId = toast.loading("Por favor, aguarde...");
@@ -45,12 +45,22 @@ function Home() {
   }
 
   function handleFilterEntrace() {
+    if (!filterEntrace) {
+      setAnimationOut(false);
+      setFilterEntrace(true);
+      return
+    }
+    setAnimationOut(true);
+
+    setTimeout(() => {
+      setFilterEntrace(false)
+    }, 500);
+
     setClients(clientsCopy);
-    setFilterEntrace(!filterEntrace);
   }
 
   async function handleVisitationOrder() {
-    const toastId = toast.loading("Por favor, aguarde...");
+    const toastId = toast.loading("Calculando rota...");
 
     try {
       const response = await api.get("/visitation-order");
@@ -59,7 +69,7 @@ function Home() {
       setVisitOrderModalEntrace(true);
 
       toast.update(toastId, {
-        render: "Tudo ok!",
+        render: "Tudo Pronto!",
         type: "success",
         isLoading: false,
         autoClose: 3000,
@@ -85,7 +95,7 @@ function Home() {
       <Header />
       <main className='main-home'>
         <div className='home-table-container'>
-          <div className="home-button-container">
+          <div className="home-button-container fade-in-left">
             <button onClick={() => setRegisterModalEntrace(!registerModalEntrace)}>
               <div className='img-button'>
                 <img src={more} alt="more" />
@@ -106,7 +116,7 @@ function Home() {
             </button>
           </div>
           {filterEntrace && <Filter />}
-          <div className="home-table">
+          <div className="home-table fade-in">
             <table>
               <thead>
                 <tr>
