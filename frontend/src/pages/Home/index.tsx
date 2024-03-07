@@ -10,6 +10,7 @@ import { formatNumberPhone } from '../../helpers/formatNumberPhone';
 import RegisterModal from '../../components/RegisterModal';
 import useStatesContext from '../../hooks/useStatesContext';
 import VisitOrderModal from '../../components/VisitOrderModal';
+import { toast } from 'react-toastify';
 
 
 function Home() {
@@ -17,13 +18,29 @@ function Home() {
   const { registerModalEntrace, setRegisterModalEntrace, clients, setClients, setClientsCopy, clientsCopy, setVisitOrderModalEntrace, visitOrderModalEntrace, setClientsVisitationOrder } = useStatesContext();
 
   async function getClients() {
+    const toastId = toast.loading("Por favor, aguarde...");
+
     try {
       const response = await api.get("/client");
 
       setClients(response.data);
       setClientsCopy(response.data);
+
+      toast.update(toastId, {
+        render: "Bem-vindo ao CM System!",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+        closeOnClick: true
+      });
     } catch (error) {
-      console.log(error);
+      toast.update(toastId, {
+        render: "Erro interno do servidor. Tente novamente mais tarde!",
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+        closeOnClick: true
+      });
     }
   }
 
@@ -33,13 +50,29 @@ function Home() {
   }
 
   async function handleVisitationOrder() {
+    const toastId = toast.loading("Por favor, aguarde...");
+
     try {
       const response = await api.get("/visitation-order");
 
       setClientsVisitationOrder(response.data);
       setVisitOrderModalEntrace(true);
+
+      toast.update(toastId, {
+        render: "Tudo ok!",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+        closeOnClick: true
+      });
     } catch (error) {
-      console.log("Erro interno do servidor. Tente novamente mais tarde!");
+      toast.update(toastId, {
+        render: "Erro interno do servidor. Tente novamente mais tarde!",
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+        closeOnClick: true
+      });
     }
   }
 

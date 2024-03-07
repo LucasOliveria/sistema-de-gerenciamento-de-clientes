@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent } from 'react';
+import { toast } from 'react-toastify';
 import { api } from '../../api/axios';
 import xIcon from "../../assets/x-icon.png";
 import useStatesContext from '../../hooks/useStatesContext';
@@ -8,10 +9,12 @@ function RegisterModal() {
   const { formRegister, setFormRegister, setRegisterModalEntrace, setClients, clients, setClientsCopy, clientsCopy } = useStatesContext();
 
   function handleChangeFormRegister(event: ChangeEvent<HTMLInputElement>) {
-    const { name, value } = event.target
+    const { name, value } = event.target;
 
     if ((name === "coord_x" || name === "coord_y" || name === "phone") && isNaN(Number(value))) {
-      return;
+      if (value !== "-") {
+        return;
+      }
     }
 
     if (name === "phone" && value.length > 11) {
@@ -37,9 +40,9 @@ function RegisterModal() {
     const { coord_x, coord_y } = coordinates
 
     if (!name || !email || !phone || !coord_x || !coord_y) {
-      return console.log("Preencha todos os campos!");
+      return toast.info("Preencha todos os campos!");
     }
-
+    const toastId = toast.loading("Por favor, aguarde...");
     try {
       const response = await api.post("/client", {
         name,
@@ -54,20 +57,45 @@ function RegisterModal() {
       setRegisterModalEntrace(false);
       setFormRegister({ name: "", email: "", phone: "", coordinates: { coord_x: "", coord_y: "" } });
 
-      console.log("Cliente cadastrado com sucesso!");
+      toast.update(toastId, {
+        render: "Cliente cadastrado com sucesso!",
+        type: "success",
+        isLoading: false,
+        autoClose: 2500,
+        closeOnClick: true
+      });
     } catch (error: any) {
-      if (error.response.status !== 500) {
-        console.log(error.response.data.message);
+      if (error.response.status === 400) {
+        toast.update(toastId, {
+          render: error.response.data.message,
+          type: "info",
+          isLoading: false,
+          autoClose: 2500,
+          closeOnClick: true
+        });
         return;
       }
-      console.log("Erro interno do servidor. Tente novamente mais tarde!");
+
+      toast.update(toastId, {
+        render: "Erro interno do servidor. Tente novamente mais tarde!",
+        type: "error",
+        isLoading: false,
+        autoClose: 2500,
+        closeOnClick: true
+      });
     }
   }
 
+  function handleCloseModal() {
+    setRegisterModalEntrace(false)
+    setFormRegister({
+      name: "", email: "", phone: "", coordinates: { coord_x: "", coord_y: "" }
+    })
+  }
   return (
     <div className="generic-modal">
       <form onSubmit={handleSubmitRegister}>
-        <img src={xIcon} alt="x-icon" onClick={() => setRegisterModalEntrace(false)} />
+        <img src={xIcon} alt="x-icon" onClick={handleCloseModal} />
         <h3>Cadastrar Cliente</h3>
         <div className="input-register-container">
           <label htmlFor="name">Nome</label>

@@ -54,3 +54,38 @@
   color: #4361ee;
   font-weight: 700;
 }
+
+.no-clients {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35.2rem;
+  height: 9rem;
+  border-radius: 0.8rem;
+  background-color: #ffffff;
+  position: relative;
+}
+
+.no-clients h4 {
+  text-align: center;
+  color: #4361ee;
+}
+
+
+.Toastify__close-button {
+  all: unset;
+}
+
+.Toastify__close-button:hover {
+  background-color: unset;
+  box-shadow: none;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--info {
+  background-color: #4361EE !important;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--info,
+.Toastify__toast-theme--colored.Toastify__toast--success {
+  font-weight: 700;
+}
